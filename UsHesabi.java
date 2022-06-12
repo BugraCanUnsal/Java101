@@ -12,10 +12,10 @@ public class UsHesabi {
     }
 
     static int power(int a,int b){
-        int sum=1;
-        for (int i = 0; i < b; i++) {
-            sum*=a;
+
+        while (b!=0){
+            return a*power(a,b-1);
         }
-        return sum;
+        return 1;
     }
 }
