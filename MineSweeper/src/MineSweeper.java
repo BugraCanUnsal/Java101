@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.SortedMap;
+
 public class MineSweeper {
 
     int x,y;
@@ -41,6 +44,70 @@ public class MineSweeper {
             }
             System.out.println();
         }
+    }
+    public boolean isMined(int coord1, int coord2){
+        return this.minedBoard[coord1][coord2].equals("*");
+    }
+
+    public String checkNearMines(int coord1,int coord2){
+        int counter = 0;
+
+        for (int i = coord1-1; i < coord1+2 ; i++) {
+            for (int j = coord2-1; j < coord2+2; j++) {
+                if (i<0 || i>this.board.length-1){
+                    continue;
+                } else if (j<0 || j>this.board[0].length-1) {
+                    continue;
+                } else if (this.minedBoard[i][j].equals("*")) counter++;
+            }
+        }return Integer.toString(counter);
+    }
+    public void run(){
+        Scanner input = new Scanner(System.in);
+        int mines = 0;
+        for (String[] mine: this.minedBoard) {
+            for (String Mine: mine ) {
+                if (Mine.equals("*"))mines++;
+            }
+        }
+        System.out.println("Mayin Tarlasi Oyununa Hosgeldiniz !");
+
+        while (true){
+            System.out.println("=================================");
+
+            showBoard(this.board);
+            System.out.print("Satir Giriniz : ");
+            int coord1 = input.nextInt();
+            System.out.print("Sutun Giriniz : ");
+            int coord2 = input.nextInt();
+
+            if (coord1>this.board.length-1 || coord2>this.board[0].length){
+                System.out.println("Lütfen sinir disina cikmayiniz!!");
+                continue;
+            } else if (coord1<0 || coord2<0) {
+                System.out.println("Lütfen sinir disina cikmayiniz!!");
+                continue;
+            } else if (!isMined(coord1,coord2)){
+                String mineCount = checkNearMines(coord1,coord2);
+                this.board[coord1][coord2] = mineCount;
+            } else {
+                System.out.println("Game Over!!");
+                showBoard(this.minedBoard);
+                break;
+            }
+            int spaces = 0;
+            for (String[] space : this.board) {
+                for (String Space: space) {
+                    if (Space.equals("-"))spaces++;
+                }
+            }if (spaces == mines) {
+                System.out.println("Oyunu Kazandiniz !");
+                showBoard(this.board);
+                break;
+            }
+        }
+
+
     }
 
 }
