@@ -82,10 +82,10 @@ public class MineSweeper {
             int coord2 = input.nextInt();
 
             if (coord1>this.board.length-1 || coord2>this.board[0].length){
-                System.out.println("Lütfen sinir disina cikmayiniz!!");
+                System.out.println("Lutfen sinir disina cikmayiniz!!");
                 continue;
             } else if (coord1<0 || coord2<0) {
-                System.out.println("Lütfen sinir disina cikmayiniz!!");
+                System.out.println("Lutfen sinir disina cikmayiniz!!");
                 continue;
             } else if (!isMined(coord1,coord2)){
                 String mineCount = checkNearMines(coord1,coord2);
@@ -102,6 +102,13 @@ public class MineSweeper {
                 }
             }if (spaces == mines) {
                 System.out.println("Oyunu Kazandiniz !");
+                for (int i = 0; i <this.minedBoard.length ; i++) {
+                    for (int j = 0; j <this.minedBoard[0].length ; j++) {
+                        if (this.minedBoard[i][j].equals("*")){
+                            this.board[i][j] = this.minedBoard[i][j];
+                    }
+                }
+                }
                 showBoard(this.board);
                 break;
             }
