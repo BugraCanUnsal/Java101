@@ -1,11 +1,10 @@
 import java.util.Scanner;
-import java.util.SortedMap;
 
 public class MineSweeper {
 
-    int x,y;
-    String[][] board;
-    String[][] minedBoard;
+    private int x,y;
+    private String[][] board;
+    private String[][] minedBoard;
 
 
     public MineSweeper(int x, int y) {
